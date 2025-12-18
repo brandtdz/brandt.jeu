@@ -11,12 +11,12 @@
     const lastName = localStorage.getItem("lastName") || "—";
     const phone = localStorage.getItem("phoneNumber") || "—";
 
-    // Title
+    // ===== TITLE =====
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(22);
     doc.text("CERTIFICAT DE PARTICIPATION", 105, 30, { align: "center" });
 
-    // Main text
+    // ===== BODY TEXT =====
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(14);
     doc.text(
@@ -33,16 +33,24 @@ Merci pour votre participation.`,
       { align: "center" }
     );
 
-    // Logo
+    // ===== LOGO =====
     const logo = new Image();
     logo.src = "./Brandt-Logo.png";
 
-    logo.onload = () => {
+    logo.onload = function () {
       doc.addImage(logo, "PNG", 60, 120, 90, 30);
+      doc.save(`Certificat_${firstName}_${lastName}.pdf`);
+    };
+
+    // ===== FALLBACK (if logo fails) =====
+    logo.onerror = function () {
+      console.warn("Logo not found — saving without logo");
       doc.save(`Certificat_${firstName}_${lastName}.pdf`);
     };
   });
 </script>
+
+
 
 
 
