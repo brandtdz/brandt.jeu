@@ -1,54 +1,99 @@
-<button id="downloadPdf" class="button">
-  Télécharger mon certificat
-</button>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Félicitations - Brandt</title>
+
+  <!-- jsPDF (MUST be here) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #1e81b0, #ee4266);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.15);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    button {
+      background: #ff2222;
+      border: none;
+      color: white;
+      padding: 15px 40px;
+      font-size: 18px;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>🏆 Félicitations !</h1>
+  <p>Vous avez complété avec succès le jeu Brandt.</p>
+
+  <button id="downloadPdf">Télécharger mon certificat</button>
+</div>
 
 <script>
-  document.getElementById("downloadPdf").addEventListener("click", () => {
+  document.getElementById("downloadPdf").onclick = function () {
+
+    // SAFETY CHECK
+    if (!window.jspdf) {
+      alert("jsPDF not loaded");
+      return;
+    }
+
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    const firstName = localStorage.getItem("firstName") || "—";
-    const lastName = localStorage.getItem("lastName") || "—";
-    const phone = localStorage.getItem("phoneNumber") || "—";
+    const firstName = localStorage.getItem("firstName") || "Participant";
+    const lastName = localStorage.getItem("lastName") || "";
+    const phone = localStorage.getItem("phoneNumber") || "";
 
-    // ===== TITLE =====
+    // TEXT
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(22);
     doc.text("CERTIFICAT DE PARTICIPATION", 105, 30, { align: "center" });
 
-    // ===== BODY TEXT =====
-    doc.setFont("Helvetica", "normal");
     doc.setFontSize(14);
+    doc.setFont("Helvetica", "normal");
     doc.text(
-`Félicitations ${firstName} ${lastName},
+`Félicitations ${firstName} ${lastName}
 
 Vous avez complété avec succès
 le jeu Brandt.
 
-Téléphone : ${phone}
-
-Merci pour votre participation.`,
+Téléphone : ${phone}`,
       105,
-      55,
+      60,
       { align: "center" }
     );
 
-    // ===== LOGO =====
-    const logo = new Image();
-    logo.src = "./Brandt-Logo.png";
+    // SAVE FIRST (NO LOGO BLOCKING)
+    doc.save(`Certificat_${firstName}_${lastName}.pdf`);
 
-    logo.onload = function () {
-      doc.addImage(logo, "PNG", 60, 120, 90, 30);
-      doc.save(`Certificat_${firstName}_${lastName}.pdf`);
-    };
-
-    // ===== FALLBACK (if logo fails) =====
-    logo.onerror = function () {
-      console.warn("Logo not found — saving without logo");
-      doc.save(`Certificat_${firstName}_${lastName}.pdf`);
-    };
-  });
+    // OPTIONAL LOG (for debug)
+    console.log("PDF generated");
+  };
 </script>
+
+</body>
+</html>
+
 
 
 
