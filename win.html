@@ -1,106 +1,113 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Félicitations - Le Défi Brandt</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <title>Félicitations - Brandt</title>
 
+  <!-- jsPDF (REQUIRED) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #c9d9e0, #4962cf);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      background: linear-gradient(120deg, #c9d9e0, #4962cf);
       color: #ee0808;
       text-align: center;
     }
 
     .container {
       max-width: 600px;
-      padding: 40px 30px;
-      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      background: rgba(255,255,255,0.15);
       border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
 
-    h1 {
-      font-size: 2.8em;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.4em;
-      margin-bottom: 35px;
-      line-height: 1.6;
-    }
-
-    .button {
-      display: inline-block;
-      background-color: #ff2222;
-      color: #fff;
-      font-size: 1.3em;
+    button {
+      background: #ff2222;
+      color: white;
+      border: none;
       padding: 15px 40px;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .button:hover {
-      background-color: #e61919;
-      transform: translateY(-3px);
+      font-size: 18px;
+      border-radius: 40px;
+      cursor: pointer;
     }
 
     img.logo {
       width: 180px;
-      margin-top: 30px;
+      margin-top: 25px;
     }
   </style>
 </head>
 
 <body>
-  <script>
-    // On page load, get data from localStorage
-    const firstName = localStorage.getItem("firstName") || "[Prénom]";
-    const lastName = localStorage.getItem("lastName") || "[Nom]";
-    const phoneNumber = localStorage.getItem("phoneNumber") || "[Téléphone]";
 
-    document.getElementById("downloadPdf").addEventListener("click", () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+<div class="container">
+  <h1>🏆 Félicitations !</h1>
+  <p>
+    Vous avez complété avec succès le jeu Brandt.<br>
+    Vous faites maintenant partie des participants éligibles au tirage au sort.
+  </p>
 
-      const text = `
-      
-Félicitations ${firstName} ${lastName} !
+  <button id="downloadPdf">Télécharger mon certificat</button>
 
-Vous avez complété avec succès le jeu de Brandt.
-Vous faites maintenant partie des participants éligibles au tirage au sort.
+  <br>
+  <img src="Brandt-Logo.png" class="logo" alt="Brandt Logo">
+</div>
 
-Informations du participant :
-Prénom : ${firstName}
-Nom : ${lastName}
-Téléphone : ${phoneNumber}
+<script>
+  const firstName = localStorage.getItem("firstName") || "Participant";
+  const lastName = localStorage.getItem("lastName") || "";
+  const phoneNumber = localStorage.getItem("phoneNumber") || "";
 
-Bonne chance pour le tirage au sort !
-      `;
+  document.getElementById("downloadPdf").addEventListener("click", function () {
 
-      doc.setFontSize(14);
-      doc.text(text, 15, 20);
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // TEXT
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(22);
+    doc.text("CERTIFICAT DE PARTICIPATION", 105, 30, { align: "center" });
+
+    doc.setFontSize(14);
+    doc.setFont("Helvetica", "normal");
+    doc.text(
+`Félicitations ${firstName} ${lastName}
+
+Vous avez complété avec succès
+le jeu Brandt.
+
+Téléphone : ${phoneNumber}`,
+      105,
+      60,
+      { align: "center" }
+    );
+
+    // LOGO
+    const logo = new Image();
+    logo.src = "Brandt-Logo.png";
+
+    logo.onload = function () {
+      doc.addImage(logo, "PNG", 60, 120, 90, 30);
       doc.save("Certificat_Brandt.pdf");
-    });
-        <img src="Brandt-Logo.png" alt="Brandt Logo" class="logo">
+    };
 
-  </script>
+    logo.onerror = function () {
+      // If logo fails, still save PDF
+      doc.save("Certificat_Brandt.pdf");
+    };
+  });
+</script>
+
 </body>
-
 </html>
+
+
 
 
 
