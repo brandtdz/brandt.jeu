@@ -56,12 +56,11 @@
   <button id="downloadPdf">Télécharger mon certificat</button>
 
   <br><br>
-  <img src="brandt-logo.png" class="logo" alt="Brandt Logo">
 </div>
 
 <script>
   // Get data from localStorage
-  const firstName = localStorage.getItem("firstName") || "";
+  const firstName = localStorage.getItem("firstName") || "Participant";
   const lastName = localStorage.getItem("lastName") || "";
   const phoneNumber = localStorage.getItem("phoneNumber") || "";
 
@@ -79,7 +78,7 @@
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(14);
     doc.text(
-`Félicitations  ${firstName} ${lastName}
+`Félicitations ${firstName} ${lastName}
 
 Vous avez complété avec succès le jeu Brandt.
 Vous faites maintenant partie des participants
@@ -111,9 +110,6 @@ Téléphone : ${phoneNumber}`,
 
 </body>
 </html>
-
-
-
 
 
 
