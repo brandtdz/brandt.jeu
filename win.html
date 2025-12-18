@@ -36,11 +36,6 @@
       border-radius: 40px;
       cursor: pointer;
     }
-
-    img.logo {
-      width: 180px;
-      margin-top: 25px;
-    }
   </style>
 </head>
 
@@ -54,8 +49,6 @@
   </p>
 
   <button id="downloadPdf">Télécharger mon certificat</button>
-
-  <br><br>
 </div>
 
 <script>
@@ -65,7 +58,6 @@
   const phoneNumber = localStorage.getItem("phoneNumber") || "";
 
   document.getElementById("downloadPdf").addEventListener("click", function () {
-
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF("p", "mm", "a4");
 
@@ -78,14 +70,14 @@
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(14);
     doc.text(
-`Félicitations ${firstName} ${lastName}
+`Félicitations ${firstName} ${lastName} !
 
 Vous avez complété avec succès le jeu Brandt.
 Vous faites maintenant partie des participants
 éligibles au tirage au sort.
 
-Prénom : ${firstName}`,
-Nom : ${lastName}`,
+Prénom : ${firstName}
+Nom : ${lastName}
 Téléphone : ${phoneNumber}`,
       105,
       60,
@@ -94,7 +86,7 @@ Téléphone : ${phoneNumber}`,
 
     // LOGO
     const logo = new Image();
-    logo.src = "brandt-logo.png";
+    logo.src = "wmg.png"; // NEW logo
 
     logo.onload = function () {
       doc.addImage(logo, "PNG", 60, 130, 90, 30);
@@ -102,7 +94,6 @@ Téléphone : ${phoneNumber}`,
     };
 
     logo.onerror = function () {
-      // If image fails, still download PDF
       doc.save("Certificat_Brandt.pdf");
     };
   });
@@ -110,7 +101,6 @@ Téléphone : ${phoneNumber}`,
 
 </body>
 </html>
-
 
 
 
