@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions - Le Défi Brandt</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #c9d9e0, #4962cf);
+      color: #f00808;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #question {
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      background-color: #e90d0d;
+      color: rgb(240, 235, 235);
+      border: none;
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cc2828;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Défi Brandt</h1>
+    <p id="question"></p>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Vedette أين تقع الشاشة التي تسمح بضبط درجة حرارة ثلاجات؟<br>Où se trouve l’afficheur qui permet de régler la température des réfrigérateurs Vedette ?",
+        answers: [
+          "À l’extérieur, sur la porte du congélateur <br> في الخارج، على باب المجمد",
+          "À l’intérieur, dans l’angle droit du réfrigérateur <br> في الداخل، في الزاوية اليمنى للثلاجة",
+          "Sous le bac à légume <br> تحت درج الخضروات"
+        ],
+        correct: "À l’extérieur, sur la porte du congélateur <br> في الخارج، على باب المجمد"
+      },
+      {
+        question: "كيف يمكن ضمان السلامة عند استخدام سخان الغاز؟<br>Comment assurer la sécurité lors de l’utilisation d’un chauffage à gaz ?",
+        answers: [
+          "Détecteur de monoxyde de carbone <br> كاشف أول أكسيد الكربون",
+          "Laisser allumé si la flamme est rouge <br> ترك المدفأة تعمل إذا كانت اللهب حمراء",
+          "Utiliser le chauffage dans une pièce fermée sans ventilation <br> استخدام المدفأة في غرفة مغلقة بدون تهوية"
+        ],
+        correct: "Détecteur de monoxyde de carbone <br> كاشف أول أكسيد الكربون"
+      },
+      {
+question: "Vedette كيف نشعل مواقد طباخة؟<br>Comment allume-t-on les feux des cuisinières Vedette ?",
+        answers: [
+          "Avec un briquet manuel <br> بإستخدام قداحة يدوية",
+          "Avec un bouton électrique <br> بإستخدام زر كهربائي",
+          "En appuyant sur la manette avec une seule main <br> بالضغط على المقبض بيد واحدة فقط"
+        ],
+        correct: "En appuyant sur la manette avec une seule main <br> بالضغط على المقبض بيد واحدة فقط"
+      }
+    ];
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+    questionEl.innerHTML = randomQuestion.question;
+
+    randomQuestion.answers.forEach(answer => {
+      const btn = document.createElement("button");
+      btn.innerHTML = answer;
+      btn.onclick = () => {
+        if (answer === randomQuestion.correct) {
+          window.location.href = "win.html";
+        } else {
+          alert("❌ Réponse incorrecte. Essayez encore !");
+        }
+      };
+      answersEl.appendChild(btn);
+    });
+  </script>
+</body>
+
+</html>

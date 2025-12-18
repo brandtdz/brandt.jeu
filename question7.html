@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions - Le Défi Brandt</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #f5f2f2, #911c1c);
+      color: #f00909;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #question {
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      background-color: #e70a0a;
+      color: rgb(238, 232, 232);
+      border: none;
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #d42020;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Défi Brandt</h1>
+    <p id="question"></p>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "BA65K800G Mini-LED ما هو معدل تحديث شاشة؟<br>Quel est le taux de rafraîchissement de la 65’’ Mini-LED BA65K800G ?",
+        answers: [
+          "60Hz",
+          "120Hz",
+          "144Hz"
+        ],
+        correct: "120Hz"
+      },
+      {
+        question: "BA55K600G QLED ما هي تقنية الصوت المتوفرة في شاشة؟<br>Quelle est la technologie du son disponible dans la 55’’ QLED BA55K600G ?",
+        answers: [
+          "DTS",
+          "DOLBY ATMOS",
+          "DBX"
+        ],
+        correct: "DOLBY ATMOS"
+      },
+      {
+        question: "BA43500G Google TV ما هي نسخة أندرويد الخاصة بـشاشة؟<br>Quelle est la version d’Android du 43’’ Google TV BA43500G ?",
+        answers: [
+          "Android 11",
+          "Android 13",
+          "Android 14"
+        ],
+        correct: "Android 14"
+      },
+      {
+question: " Google TV Brandt المدمجة في أجهزة Hotspot Wi-Fi إلى ماذا تُستخدم وظيفة  <br>À quoi sert la fonction Hotspot Wi-Fi intégrée dans les modèles Google TV de Brandt ?",
+        answers: [
+          "Partager la connexion Internet du téléviseur avec d’autres appareils <br> مشاركة اتصال الإنترنت الخاص بالتلفاز مع أجهزة أخرى",
+          "Bloquer l’accès au réseau <br> إيقاف الوصول إلى الشبكة",
+          "Augmenter la vitesse HDMI <br> زيادة سرعة HDMI"
+        ],
+        correct: "Partager la connexion Internet du téléviseur avec d’autres appareils <br> مشاركة اتصال الإنترنت الخاص بالتلفاز مع أجهزة أخرى"
+      }
+    ];
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+    questionEl.innerHTML = randomQuestion.question;
+
+    randomQuestion.answers.forEach(answer => {
+      const btn = document.createElement("button");
+      btn.innerHTML = answer;
+      btn.onclick = () => {
+        if (answer === randomQuestion.correct) {
+          window.location.href = "indice7.html";
+        } else {
+          alert("❌ Réponse incorrecte. Essayez encore !");
+        }
+      };
+      answersEl.appendChild(btn);
+    });
+  </script>
+</body>
+
+</html>

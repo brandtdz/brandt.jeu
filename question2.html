@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Questions - Le Défi Brandt</title>
+
+
+
+  <style>
+
+    * {
+
+        margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+    }
+
+
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      min-height: 100vh;
+
+      background: linear-gradient(120deg, #f5f2f2, #911c1c);
+
+      color: #f30606;
+
+      text-align: center;
+
+    }
+
+
+
+    .container {
+
+      max-width: 600px;
+
+      padding: 25px;
+
+      background: rgba(255, 255, 255, 0.12);
+
+      border-radius: 12px;
+
+    }
+
+
+
+    h1 {
+
+      margin-bottom: 20px;
+
+    }
+
+
+
+    #question {
+
+      font-size: 1.3em;
+
+      margin-bottom: 25px;
+
+      line-height: 1.6;
+
+    }
+
+
+
+    .answers {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 15px;
+
+    }
+
+
+
+    button {
+
+      background-color: #e61717;
+
+      color: rgb(236, 227, 227);
+
+      border: none;
+
+      padding: 12px;
+
+      font-size: 1.1em;
+
+      border-radius: 6px;
+
+      cursor: pointer;
+
+    }
+
+
+
+    button:hover {
+
+      background-color: #e73030;
+
+    }
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+  <div class="container">
+
+    <h1>Défi Brandt</h1>
+
+    <p id="question"></p>
+
+    <div class="answers" id="answers"></div>
+
+  </div>
+
+
+
+  <script>
+
+    const questions = [
+
+      {
+
+question: " ؟Brandt ما هي الفئة الطاقية لثلاجات <br>Quelle est la classe énergétique des réfrigérateurs Brandt ?",
+        answers: ["A+", "A", "B"],
+
+        correct: "A+"
+
+      },
+
+      {
+
+        question: " ؟ No Frostلِمَ تُستَخدَم تقنية <br>À quoi sert la technologie No Frost ?",
+
+        answers: [
+
+          "À éviter la formation de givre <br> لمنع تشكّل الجليد",
+
+          "À augmenter la consommation d’énergie <br> زيادة استهلاك الطاقة",
+
+          "À faire moins de bruit <br> تقليل الضجيج"
+
+        ],
+
+        correct: "À éviter la formation de givre <br> لمنع تشكّل الجليد"
+
+      },
+
+      {
+
+  question: "؟Inverter  ما هي ميزة الضاغط <br>Quel est l’avantage du compresseur Inverter ?",
+
+        answers: [
+
+          "Moins bruyant et économie d’énergie",
+
+          "Plus de bruit",
+
+          "Consommation plus élevée"
+
+        ],
+
+        correct: "Moins bruyant et économie d’énergie"
+
+      },
+
+      {
+
+     question: "؟Eco Inverter   ما مدة ضمان ضاغط <br>Quelle est la durée de garantie du compresseur Eco Inverter ?",
+
+        answers: [
+
+          "1 an <br> سنة واحدة",
+
+          "5 ans <br> خمس سنوات",
+
+          "10 ans <br> عشر سنوات"
+
+        ],
+
+        correct: "10 ans <br> عشر سنوات"
+
+      },
+
+      {
+
+question: "ما هو وضع توفير الطاقة أثناء العطلة؟<br>Quel mode permet d’économiser l’énergie pendant les vacances ?",
+
+        answers: [
+
+          "Super Freeze",
+
+          "Holiday Mode <br> وضع العطلة",
+
+          "Fresh Zone"
+
+        ],
+
+        correct: "Holiday Mode <br> وضع العطلة"
+
+      },
+
+      {
+
+  question: "؟Fresh Zone  ما فائدة <br>À quoi sert la zone Fresh Zone ?",
+
+        answers: [
+
+          "Ranger les boissons <br> تخزين المشروبات",
+
+          "Conserver viande et poisson plus longtemps <br> الحفاظ على اللحوم والأسماك",
+
+          "Éclairer le frigo <br> إنارة الثلاجة"
+
+        ],
+
+        correct: "Conserver viande et poisson plus longtemps <br> الحفاظ على اللحوم والأسماك"
+
+      }
+
+    ];
+
+
+
+    const questionEl = document.getElementById("question");
+
+    const answersEl = document.getElementById("answers");
+
+
+
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+
+    questionEl.innerHTML = randomQuestion.question;
+
+
+
+    randomQuestion.answers.forEach(answer => {
+
+      const btn = document.createElement("button");
+
+      btn.innerHTML = answer;
+
+      btn.onclick = () => {
+
+        if (answer === randomQuestion.correct) {
+
+          window.location.href = "indice2.html";
+
+        } else {
+
+          alert("❌ Réponse incorrecte. Essayez encore !");
+
+        }
+
+      };
+
+      answersEl.appendChild(btn);
+
+    });
+
+  </script>
+
+</body>
+
+</html>

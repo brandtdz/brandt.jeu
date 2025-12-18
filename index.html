@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Défi Brandt</title>
+  <style>
+    /* General resets */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #f5f2f2, #911c1c);
+      color: #dd0c0c;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      width: 200px;
+      margin-bottom: 20px;
+      animation: fadeIn .8s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      margin-bottom: 15px;
+      letter-spacing: 1.5px;
+      animation: slideIn .8s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      animation: slideIn .8s ease-in-out;
+    }
+
+    .button {
+      text-decoration: none;
+      background-color: #d30606;
+      color: #e4c4c4;
+      font-size: 1.3em;
+      padding: 15px 40px;
+      border-radius: 30px;
+      box-shadow: 0px 5px 15px rgba(8, 6, 6, 0.3);
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      cursor: pointer;
+      animation: fadeIn .8s ease-in-out;
+    }
+
+    .button:hover {
+      background-color: #a82a2a;
+      box-shadow: 0px 10px 20px rgba(59, 12, 24, 0.4);
+      transform: translateY(-3px);
+    }
+
+    footer {
+      font-size: 0.9em;
+      margin-top: 20px;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="PUBLIC/Brandt Logo.png" class="logo" />
+    <h1>Bienvenue au jeu Brandt</h1>
+    <p>Explorez nos produits, relevez le défi et tentez de gagner des cadeaux exceptionnels Brandt.</p>
+    <a href="form.html" class="button">Commencer le jeu</a>
+    <footer>
+      © Brandt Algérie — Jeu promotionnel 2025
+    </footer>
+  </div>
+</body>
+
+
+</html>
+
+
+
+

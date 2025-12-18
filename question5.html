@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions - Le Défi Brandt</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #f5f2f2, #911c1c);
+      color: #f50b0b;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #question {
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      background-color: #ec0606;
+      color: rgb(252, 252, 252);
+      border: none;
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c93232;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Défi Brandt</h1>
+    <p id="question"></p>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: " ؟Brandtما هي القدرة الحرارية القصوى الّتي يمكن أن تصل إليها لوحة الطهي <br>Quelle est la puissance maximale que peut atteindre une table de cuisson Brandt ?",
+        answers: [
+          "11 500 W <br> ‏500 11 واط",
+          "9 000 W <br> ‏000 9 واط",
+          "3 000 W <br> ‏000 3 واط"
+        ],
+        correct: "11 500 W <br> ‏500 11 واط"
+      },
+      {
+        question: "ما هي وظيفة الكتاليز في الفرن؟<br>Quelle est la fonction de la catalyse dans un four ?",
+        answers: [
+          "Refroidir le four <br> تبريد الفرن",
+          "Garder le four propre <br> الحفاظ على نظافة الفرن",
+          "Rendre le four plus solide <br> جعل الفرن أكثر متانة"
+        ],
+        correct: "Garder le four propre <br> الحفاظ على نظافة الفرن"
+      },
+      {
+        question: "ما هي وظيفة المنظِّم الحراري (الترموستات) في الطباخة ؟<br>A quoi sert le thermostat dans une cuisinière ?",
+        answers: [
+          "A augmenter la vitesse de la cuisson <br> زيادة سرعة الطهي",
+          "A afficher la température du four <br> الإعلام بدرجة حرارة الفرن",
+          "A régler la température du four <br> ضبط درجة حرارة الفرن"
+        ],
+        correct: "A régler la température du four <br> ضبط درجة حرارة الفرن"
+      }
+    ];
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+    questionEl.innerHTML = randomQuestion.question;
+
+    randomQuestion.answers.forEach(answer => {
+      const btn = document.createElement("button");
+      btn.innerHTML = answer;
+      btn.onclick = () => {
+        if (answer === randomQuestion.correct) {
+          window.location.href = "indice5.html";
+        } else {
+          alert("❌ Réponse incorrecte. Essayez encore !");
+        }
+      };
+      answersEl.appendChild(btn);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scanner - Le Défi Brandt</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #f5f2f2, #911c1c);
+      color: rgb(241, 4, 4);
+      text-align: center;
+    }
+    .container { width: 100%; max-width: 350px; }
+    h1 { margin-bottom: 15px; }
+    p { margin-bottom: 20px; }
+    #qr-reader { width: 100%; margin: auto; }
+    #reader-message { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Scanner le QR Code</h1>
+    <p>Placez le QR Code devant la caméra</p>
+    <div id="qr-reader"></div>
+    <p id="reader-message"></p>
+  </div>
+
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script>
+    const message = document.getElementById("reader-message");
+
+    function onScanSuccess(decodedText) {
+      message.innerText = "QR Code détecté ✅ Redirection...";
+      html5QrCode.stop().then(() => {
+        // Redirect directly to the scanned URL
+        window.location.href = decodedText.trim();
+      }).catch(err => {
+        console.error("Erreur lors de l'arrêt du scanner :", err);
+      });
+    }
+
+    function onScanFailure(error) {
+      // Ignore scan errors
+    }
+
+    const html5QrCode = new Html5Qrcode("qr-reader");
+
+    Html5Qrcode.getCameras().then(cameras => {
+      if (cameras && cameras.length) {
+        html5QrCode.start(
+          { facingMode: "environment" },
+          { fps: 10, qrbox: 250 },
+          onScanSuccess,
+          onScanFailure
+        ).catch(err => {
+          message.innerText = "❌ Impossible de démarrer le scanner";
+          console.error(err);
+        });
+      } else {
+        message.innerText = "❌ Aucune caméra détectée";
+      }
+    }).catch(err => {
+      message.innerText = "❌ Impossible d'accéder à la caméra";
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+

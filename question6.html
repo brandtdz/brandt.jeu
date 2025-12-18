@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions - Le Défi Brandt</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #f5f2f2, #911c1c);
+      color: #e90707;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #question {
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      background-color: #e60707;
+      color: rgb(247, 241, 241);
+      border: none;
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cc2020;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Défi Brandt</h1>
+    <p id="question"></p>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "ما هو فائدة الضاغط (Inverter) في جهاز المكيف؟<br>Quel est l’avantage d’un compresseur Inverter dans un climatiseur ?",
+        answers: [
+          "Économie d’énergie <br> توفير الطاقة",
+          "Plus de bruit <br> ضجيج أكثر",
+          "Moins froid <br> أقل برودة"
+        ],
+        correct: "Économie d’énergie <br> توفير الطاقة"
+      },
+      {
+        question: "ما هي الميزة الرئيسية لمكيف الهواء من النوع الاستوائي؟<br>Quel est le principal avantage d’un climatiseur de type Tropical ?",
+        answers: [
+          "Fonctionnement à haute température <br> لعمل في درجات حرارة عالية",
+          "Peu durable <br> قليل المتانة",
+          "Mauvais confort <br> راحة سيئة"
+        ],
+        correct: "Fonctionnement à haute température <br> لعمل في درجات حرارة عالية"
+      }
+    ];
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+    questionEl.innerHTML = randomQuestion.question;
+
+    randomQuestion.answers.forEach(answer => {
+      const btn = document.createElement("button");
+      btn.innerHTML = answer;
+      btn.onclick = () => {
+        if (answer === randomQuestion.correct) {
+          window.location.href = "indice6.html";
+        } else {
+          alert("❌ Réponse incorrecte. Essayez encore !");
+        }
+      };
+      answersEl.appendChild(btn);
+    });
+  </script>
+</body>
+
+</html>

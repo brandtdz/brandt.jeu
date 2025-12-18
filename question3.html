@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions - Le Défi Brandt</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #f5f2f2, #911c1c);
+      color: #eb0808;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #question {
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      background-color: #d81414;
+      color: rgb(250, 245, 245);
+      border: none;
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b63131;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Défi Brandt</h1>
+    <p id="question"></p>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "متى نستخدم التشغيل المؤجل غالباً؟<br>À quel moment le départ différé est-il souvent utilisé ?",
+        answers: [
+          "Quand on veut que le linge termine juste avant de rentrer chez soi <br> عندما نريد أن ينتهي الغسيل قبل وقت وصولنا للمنزل",
+          "Quand on veut surveiller la machine minute par minute <br> عندما نريد متابعة الغسالة دقيقة بدقيقة",
+          "Quand on veut réduire la vitesse d’essorage <br> عندما نريد تخفيض سرعة العصر"
+        ],
+        correct: "Quand on veut que le linge termine juste avant de rentrer chez soi <br> عندما نريد أن ينتهي الغسيل قبل وقت وصولنا للمنزل"
+      },
+      {
+        question: "ماذا يوفّر محرك الإنفرتر؟<br>Le moteur Inverter permet une machine :",
+        answers: [
+          "Plus silencieuse et durable <br> آلة أكثر هدوءًا وأطول عمراً",
+          "Plus consommatrice en énergie <br> آلة تتطلب المزيد من الطاقة",
+          "Plus lente <br> آلة أبطأ"
+        ],
+        correct: "Plus silencieuse et durable <br> آلة أكثر هدوءًا وأطول عمراً"
+      },
+      {
+        question: "أي نوع من الملابس يمكن أن يستفيد من ميزة البخار؟<br>Quel linge peut profiter de l’option vapeur ?",
+        answers: [
+          "Le linge propre qui a besoin d’être rafraîchi <br> الملابس النظيفة التي تحتاج إلى انتعاش",
+          "Les chaussures <br> الأحذية",
+          "Le linge très sale plein de boue <br> الملابس المتّسخة جداً"
+        ],
+        correct: "Le linge propre qui a besoin d’être rafraîchi <br> الملابس النظيفة التي تحتاج إلى انتعاش"
+      }
+    ];
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+    questionEl.innerHTML = randomQuestion.question;
+
+    randomQuestion.answers.forEach(answer => {
+      const btn = document.createElement("button");
+      btn.innerHTML = answer;
+      btn.onclick = () => {
+        if (answer === randomQuestion.correct) {
+          window.location.href = "indice3.html";
+        } else {
+          alert("❌ Réponse incorrecte. Essayez encore !");
+        }
+      };
+      answersEl.appendChild(btn);
+    });
+  </script>
+</body>
+
+</html>

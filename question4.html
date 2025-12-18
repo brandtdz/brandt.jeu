@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions - Le Défi Brandt</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #f5f2f2, #911c1c);
+      color: #f50707;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #question {
+      font-size: 1.3em;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    button {
+      background-color: #e60909;
+      color: rgb(253, 253, 253);
+      border: none;
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #bb2424;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Défi Brandt</h1>
+    <p id="question"></p>
+    <div class="answers" id="answers"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "ما دور الملح في غسالة الأطباق؟<br>À quoi sert le sel dans le lave-vaisselle ?",
+        answers: [
+          "À améliorer le lavage en adoucissant l’eau <br> تحسين الغسيل عبر تليين الماء",
+          "À saler les aliments <br> تمليح الطعام",
+          "À faire de la mousse <br> صنع رغوة أكثر"
+        ],
+        correct: "À améliorer le lavage en adoucissant l’eau <br> تحسين الغسيل عبر تليين الماء"
+      },
+      {
+      question: "؟ Brandt ما هي فئة الطاقة لغسالة الأطباق <br>Quelle est la note énergétique attribuée au lave-vaisselle Brandt ?",
+        answers: [
+          "Classe A++",
+          "Classe A+",
+          "Classe B"
+        ],
+        correct: "Classe A++"
+      },
+      {
+        question: "ماذا يعني أن غسالة الأطباق سعتها 12؟<br>Quand on dit qu’un lave-vaisselle a une capacité de 12 couverts, cela veut dire :",
+        answers: [
+          "Qu’il peut laver exactement 12 services complets (assiette, verre, couverts, bol, tasse) <br> يمكنها غسل 12 خدمة طعام كاملة (طبق – كوب – أدوات – زبدية – فنجان)",
+          "Qu’il peut laver 12 assiettes seulement <br> يمكنها غسل 12 طبقاً فقط",
+          "Les cycles de désinfection uniquement <br> دورة لتعقيم الأدوات فقط"
+        ],
+        correct: "Qu’il peut laver exactement 12 services complets (assiette, verre, couverts, bol, tasse) <br> يمكنها غسل 12 خدمة طعام كاملة (طبق – كوب – أدوات – زبدية – فنجان)"
+      }
+    ];
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+    questionEl.innerHTML = randomQuestion.question;
+
+    randomQuestion.answers.forEach(answer => {
+      const btn = document.createElement("button");
+      btn.innerHTML = answer;
+      btn.onclick = () => {
+        if (answer === randomQuestion.correct) {
+          window.location.href = "indice4.html";
+        } else {
+          alert("❌ Réponse incorrecte. Essayez encore !");
+        }
+      };
+      answersEl.appendChild(btn);
+    });
+  </script>
+</body>
+
+</html>
