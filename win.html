@@ -61,7 +61,7 @@
 
 <script>
   // Get data from localStorage
-  const firstName = localStorage.getItem("firstName") || "Participant";
+  const firstName = localStorage.getItem("firstName") || "";
   const lastName = localStorage.getItem("lastName") || "";
   const phoneNumber = localStorage.getItem("phoneNumber") || "";
 
@@ -79,14 +79,14 @@
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(14);
     doc.text(
-`Félicitations ${firstName} ${lastName}
+`Félicitations 🎉🎉 ${firstName} ${lastName}
 
 Vous avez complété avec succès le jeu Brandt.
 Vous faites maintenant partie des participants
 éligibles au tirage au sort.
 
-Prénom : ${firstName}
-Nom : ${lastName}
+Prénom : ${firstName}`,
+Nom : ${lastName}`,
 Téléphone : ${phoneNumber}`,
       105,
       60,
@@ -111,6 +111,7 @@ Téléphone : ${phoneNumber}`,
 
 </body>
 </html>
+
 
 
 
