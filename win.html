@@ -66,7 +66,6 @@
 </head>
 
 <body>
-  
   <script>
     // On page load, get data from localStorage
     const firstName = localStorage.getItem("firstName") || "[Prénom]";
@@ -78,6 +77,7 @@
       const doc = new jsPDF();
 
       const text = `
+      
 Félicitations ${firstName} ${lastName} !
 
 Vous avez complété avec succès le jeu de Brandt.
@@ -101,6 +101,7 @@ Bonne chance pour le tirage au sort !
 </body>
 
 </html>
+
 
 
 
