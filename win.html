@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Félicitations - Brandt</title>
 
-  <!-- jsPDF (REQUIRED) -->
+  <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <style>
@@ -55,11 +55,12 @@
 
   <button id="downloadPdf">Télécharger mon certificat</button>
 
-  <br>
-  <img src="Brandt-Logo.png" class="logo" alt="Brandt Logo">
+  <br><br>
+  <img src="brandt-logo.png" class="logo" alt="Brandt Logo">
 </div>
 
 <script>
+  // Get data from localStorage
   const firstName = localStorage.getItem("firstName") || "Participant";
   const lastName = localStorage.getItem("lastName") || "";
   const phoneNumber = localStorage.getItem("phoneNumber") || "";
@@ -67,21 +68,25 @@
   document.getElementById("downloadPdf").addEventListener("click", function () {
 
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+    const doc = new jsPDF("p", "mm", "a4");
 
-    // TEXT
+    // TITLE
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(22);
     doc.text("CERTIFICAT DE PARTICIPATION", 105, 30, { align: "center" });
 
-    doc.setFontSize(14);
+    // BODY TEXT
     doc.setFont("Helvetica", "normal");
+    doc.setFontSize(14);
     doc.text(
 `Félicitations ${firstName} ${lastName}
 
-Vous avez complété avec succès
-le jeu Brandt.
+Vous avez complété avec succès le jeu Brandt.
+Vous faites maintenant partie des participants
+éligibles au tirage au sort.
 
+Prénom : ${firstName}
+Nom : ${lastName}
 Téléphone : ${phoneNumber}`,
       105,
       60,
@@ -90,15 +95,15 @@ Téléphone : ${phoneNumber}`,
 
     // LOGO
     const logo = new Image();
-    logo.src = "Brandt-Logo.png";
+    logo.src = "brandt-logo.png";
 
     logo.onload = function () {
-      doc.addImage(logo, "PNG", 60, 120, 90, 30);
+      doc.addImage(logo, "PNG", 60, 130, 90, 30);
       doc.save("Certificat_Brandt.pdf");
     };
 
     logo.onerror = function () {
-      // If logo fails, still save PDF
+      // If image fails, still download PDF
       doc.save("Certificat_Brandt.pdf");
     };
   });
@@ -106,6 +111,8 @@ Téléphone : ${phoneNumber}`,
 
 </body>
 </html>
+
+
 
 
 
