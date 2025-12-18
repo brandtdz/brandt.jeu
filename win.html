@@ -73,15 +73,43 @@
       Vous faites maintenant partie des participants éligibles au tirage au sort.
     </p>
 
-    <!-- Download PDF Button -->
-    <a href="jspdf" download class="button">Télécharger mon certificat</a>
-
     <!-- Brandt Logo -->
-    <img src="Brandt-Logo.png" alt="Brandt Logo" class="logo">
   </div>
+  <script>
+    // On page load, get data from localStorage
+    const firstName = localStorage.getItem("firstName") || "[Prénom]";
+    const lastName = localStorage.getItem("lastName") || "[Nom]";
+    const phoneNumber = localStorage.getItem("phoneNumber") || "[Téléphone]";
+
+    document.getElementById("downloadPdf").addEventListener("click", () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const text = `
+Félicitations ${firstName} ${lastName} !
+
+Vous avez complété avec succès le jeu de Brandt.
+Vous faites maintenant partie des participants éligibles au tirage au sort.
+
+Informations du participant :
+Prénom : ${firstName}
+Nom : ${lastName}
+Téléphone : ${phoneNumber}
+
+Bonne chance pour le tirage au sort !
+      `;
+
+      doc.setFontSize(14);
+      doc.text(text, 15, 20);
+      doc.save("Certificat_Brandt.pdf");
+    });
+        <img src="Brandt-Logo.png" alt="Brandt Logo" class="logo">
+
+  </script>
 </body>
 
 </html>
+
 
 
 
